@@ -30,7 +30,6 @@ public class LivrosService {
 	
 	public Livro buscar(Long id) {
 		Livro livro = livrosRepository.findById(id).get();
-		
 		if(livro == null) {
 			throw new LivroNaoEncontradoException("Livro não encontrado.");
 		}
@@ -71,6 +70,13 @@ public class LivrosService {
 		comentario.setData(new Date());
 		
 		return comentariosRepository.save(comentario);
+	}
+	
+	
+	public List<Comentario> listarComentario(Long livroId){
+		Livro livro = buscar(livroId);
+		
+		return livro.getComentarios();
 	}
 }
 
